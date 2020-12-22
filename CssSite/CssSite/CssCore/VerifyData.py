@@ -2,8 +2,8 @@ from CssCore.init import *
 # from init import *
 
 class VerifyData:
-    def __init__(self, FileToCheck):
-        self.FileFullName = os.path.split(FileToCheck)[1]
+    def __init__(self, VerifyDataAddress):
+        self.FileFullName = os.path.split(VerifyDataAddress)[1]
         self.FileName = self.FileFullName.split('.')[0]
         self.UserDataDir = os.path.join(USER_DATA_DIR, self.FileName)
         if (os.path.isdir(self.UserDataDir) == False):
@@ -11,6 +11,7 @@ class VerifyData:
         else:
             BackUpDir = os.getcwd()
             os.chdir(self.UserDataDir)
+
             FileToRead = open("%s.pickle"%(self.FileName), "rb")
             self.MerkleTree = pickle.load(FileToRead)
             FileToRead.close()
@@ -126,15 +127,15 @@ class VerifyData:
             print("Error: %s file not found" % '%s_OutputBc.json'%self.FileName)
         os.chdir(BackUpDir)
 
-def ReturnAuxiPath(FileToCheck, ShardId=None):
-    Verify = VerifyData(FileToCheck)
-    if (ShardId == None):
-        ShardId = random.randint(0, Verify.Metadata["NumberOfShard"])
-    elif (ShardId >= Verify.Metadata["NumberOfShard"]):
+def ReturnAuxiPath(VerifyDataAddress, VerifyDataShardId=None):
+    Verify = VerifyData(VerifyDataAddress)
+    if (VerifyDataShardId == None):
+        VerifyDataShardId = random.randint(0, Verify.Metadata["NumberOfShard"])
+    elif (VerifyDataShardId >= Verify.Metadata["NumberOfShard"]):
         print("ERROR!!! Using wrong shard ID \n")
         return False
 
-    OutputBc = Verify.GenerateOutputForBc(ShardId)
+    OutputBc = Verify.GenerateOutputForBc(VerifyDataShardId)
     Verify.CleanUpData()
     if (OutputBc != False):
         return Verify.SaveToJson(OutputBc)

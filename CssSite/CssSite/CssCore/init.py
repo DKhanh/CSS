@@ -6,11 +6,14 @@ import random
 import pickle
 
 APPLICATION_NAME = "CSS"
+
+DATA_FILE = 'dataFile'
+MERKLE_FILE = "merkleFile"
+
 # SERVER_ADDR = "api.plos.org"
 # SERVER_URL = "/search?q=title%3ADNA"
 SERVER_ADDR = "www.httpbin.org"
 SERVER_URL = "/"
-
 
 while (True):
     if (os.path.split(os.getcwd())[1] == APPLICATION_NAME):

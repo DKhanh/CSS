@@ -17,8 +17,7 @@ import json
 from CssCore.init import *
 from CssCore.PreprocessData import *
 from CssCore.VerifyData import *
-print(INPUT_DATA_DIR)
-
+# print(INPUT_DATA_DIR)
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -45,8 +44,8 @@ def submitFile(request):
 
     elif request.method == 'POST':
         print('submit new file')
-        dataStoreFile = handle_uploaded_file(request.FILES['dataFile'])
-        merkleStoreFile = handle_uploaded_file(request.FILES['merkleFile'])
+        dataStoreFile = handle_uploaded_file(request.FILES[DATA_FILE])
+        merkleStoreFile = handle_uploaded_file(request.FILES[MERKLE_FILE])
         print(dataStoreFile)
         print(merkleStoreFile)
         ReturnAddress = PreprocessingData(dataStoreFile)
@@ -71,15 +70,17 @@ def generateFileName():
 @api_view(['POST'])
 def challenge(request):
     print('start challenge with request')
-    print(request)
+    print(request.GET["FileAddress"])
 
+    VerifyDataAddress = request.GET["FileAddress"]
+    VerifyDataShardId = 10
     # Establishing connection with SERVER_ADDR/SERVER_URL
     Connection = http.client.HTTPSConnection(SERVER_ADDR)
     # Connection.request("GET", SERVER_URL)
 
     # Preparing json data to send out
     Headers = {"Content-type": "Application/json"}
-    OutputToBc = ReturnAuxiPath("/Users/khanhtran/2070102/DE/CSS/UserData/all_log/all_log.txt", 2)
+    OutputToBc = ReturnAuxiPath(VerifyDataAddress, VerifyDataShardId)
     JsonData = json.dumps(OutputToBc)
 
     # Creating request to server
