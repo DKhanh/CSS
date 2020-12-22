@@ -19,7 +19,8 @@ while (True):
 
 USER_DATA_DIR = os.path.join(ROOT_DIR + "/UserData")
 BACK_UP_DIR = os.path.join(ROOT_DIR + "/UserData/BackUpUserData/")
-INPUT_DATA_DIR = os.path.join(ROOT_DIR + "/TestData/")
+# INPUT_DATA_DIR = os.path.join(ROOT_DIR + "/TestData/")
+INPUT_DATA_DIR = os.path.join(ROOT_DIR + "/CssSite/storage")
 MERKLE_TREE_DIR = os.path.join(ROOT_DIR + "/MerkleTree")
 
 sys.path.insert(1, MERKLE_TREE_DIR)

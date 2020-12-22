@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Page Title</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <h1>Welcome to Cloud Storage Server</h1>
+  <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+  <h3>UPLOAD NEW FILE TO SERVER</h3>
+
+  <form id="uploadFrom" enctype="multipart/form-data">
+    <label for="dataFile">Select choose you data file:</label>
+    <input type="file" id="dataFile" name="dataFile"><br><br>
+    <label for="merkleFile">Select choose you merkle file:</label>
+    <input type="file" id="merkleFile" name="merkleFile"><br><br>
+    <button type="button" id="doannh">Submit</button>
+  </form>
+
+  <hr style="height:2px;border-width:0;color:red;background-color:red">
+  <h3>CHECK YOUR DATA INTERGRITY</h3>
+
+  <form id="verifyData">
+    <label for="dataFile">Give me your email to receive result:</label>
+    <input type="email" id="verify_email" name="verify_email"><br><br>
+    <label for="verify_file">Give me your file name or merkle tree name:</label>
+    <input type="text" id="verify_file" name="verify_file"><br><br>
+    <label for="verify_data">Give me data shard:</label>
+    <input type="text" id="verify_data" name="verify_data"><br><br>
+    <label for="verify_index">Give me shard index:</label>
+    <input type="number" id="verify_index" name="verify_index"><br><br>
+    <button type="button" id="start_verify">Start verify</button>
+  </form>
+
+  <h1>DAY LA PHAN MEM GENERATE RA MERKLE TREE</h1>
+
+
+  <script>
+    $(document).ready(function () {
+      $("#doannh").click(function () {
+        const files = $('#dataFile')[0].files;
+        const files1 = $('#merkleFile')[0].files;
+        const formData = new FormData();
+        formData.append('dataFile', files[0]);
+        formData.append('merkleFile', files1[0]);
+        fetch('http://localhost:8564/submitFile', {
+          method: 'POST',
+          body: formData
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      });
+      //--------------
+      $("#start_verify").click(function () {
+        fetch('http://localhost:8564/challenge', {
+          method: 'POST',
+          body: 'hello'
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      });
+      //--------------
+    });
+  </script>
+
+</body>
+
+</html>

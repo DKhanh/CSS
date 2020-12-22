@@ -10,7 +10,7 @@ class VerifyData:
         else:
             BackUpDir = os.getcwd()
             os.chdir(self.UserDataDir)
-            FileToRead = open("%s.pickle"%(self.FileName), "rb")
+            FileToRead = open("%s.pickle"%(self.FileName), "rb") 
             self.MerkleTree = pickle.load(FileToRead)
             FileToRead.close()
 

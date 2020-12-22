@@ -119,7 +119,8 @@ class UserProfile:
 
         # os.chdir(BackUpDir)
 
-def PreprocessingData(InputFile):
+def PreprocessingData(FileName):
+    InputFile = os.path.join(str(INPUT_DATA_DIR) + FileName)
     try:
         UserData = UserProfile(InputFile)
     except OSError:
@@ -129,7 +130,7 @@ def PreprocessingData(InputFile):
     VerifyDataShard = UserData.VerifyDataShard()
     # print(VerifyPublicTree)
     # print(VerifyDataShard)
-    if (VerifyPublicTree == True & VerifyPublicTree == True):
+    if (VerifyPublicTree == True & VerifyDataShard == True):
         UserData.StoreMekleTree()
     else:
         UserData.CleanUpWhenFailed()
@@ -140,7 +141,7 @@ def PreprocessingData(InputFile):
     return UserData.UserDataDir + '/' + UserData.FileFullName
 
 # try:
-print(PreprocessingData(str(INPUT_DATA_DIR) + "/all_log.txt"))
+# print(PreprocessingData(str(INPUT_DATA_DIR) + "/all_log.txt"))
 # except:
 #     print("\n\n")
 
