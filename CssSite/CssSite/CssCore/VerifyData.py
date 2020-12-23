@@ -89,7 +89,9 @@ class VerifyData:
 
     def SaveToJson(self, OutputBc):
         self.OuputBcDict = {"FileFullName": self.FileFullName, 
-                            "NumberOfStep": len(OutputBc)}
+                            "NumberOfStep": len(OutputBc),
+                            "UserEmail": "abc@hcmut.edu.vn",
+                            "ContractAddress": "0x1234556"}
 
         AuxiPath = []
         for i in range(0, len(OutputBc)):
@@ -97,15 +99,7 @@ class VerifyData:
                                  "Right": OutputBc[i][1]})
         self.OuputBcDict["AuxiPath"] = AuxiPath
 
-        print(AuxiPath)
-        # BackUpDir = os.getcwd()
-        # os.chdir(self.UserDataDir) 
-        # with open('%s_OutputBc.json'%self.FileName, 'w') as fp:
-        #     json.dump(self.OuputBcDict, fp) 
-        # fp.close()
-        # os.chdir(BackUpDir)
-
-        # return os.path.join(self.UserDataDir, '%s_OutputBc.json'%self.FileName)
+        # print(AuxiPath)
         return self.OuputBcDict
     
     def CleanUpData(self):

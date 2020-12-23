@@ -13,6 +13,9 @@ import random
 import string
 import http.client
 import json
+from urllib.request import urlopen
+import requests
+import ssl
 
 from CssCore.init import *
 from CssCore.PreprocessData import *
@@ -74,18 +77,14 @@ def challenge(request):
 
     VerifyDataAddress = request.GET["FileAddress"]
     VerifyDataShardId = 10
-    # Establishing connection with SERVER_ADDR/SERVER_URL
-    Connection = http.client.HTTPSConnection(SERVER_ADDR)
-    # Connection.request("GET", SERVER_URL)
 
     # Preparing json data to send out
-    Headers = {"Content-type": "Application/json"}
+    Headers = {'Content-Type': 'application/json', 'Accept':'application/json'}
     OutputToBc = ReturnAuxiPath(VerifyDataAddress, VerifyDataShardId)
     JsonData = json.dumps(OutputToBc)
 
-    # Creating request to server
-    Connection.request("POST", "/post", JsonData, Headers)
-    response = Connection.getresponse()
-    print(response.read().decode())
+    # print(JsonData)
+    Req = requests.post(SERVER_ADDR+SERVER_URL, data = JsonData, headers=Headers)
+    # print(Req.text)
 
     return  Response(status=status.HTTP_200_OK)
