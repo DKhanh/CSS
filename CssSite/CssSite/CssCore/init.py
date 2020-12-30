@@ -10,10 +10,12 @@ APPLICATION_NAME = "CSS"
 DATA_FILE = 'dataFile'
 MERKLE_FILE = "merkleFile"
 
-SERVER_ADDR = "http://api.plos.org"
-SERVER_URL = "/search?q=title%3ADNA"
-# SERVER_ADDR = 'http://192.168.1.10:3000'
-# SERVER_URL = "/checkData"
+# SERVER_ADDR = "http://api.plos.org"
+# SERVER_URL = "/search?q=title%3ADNA"
+# SERVER_ADDR = "http://httpbin.org"
+# SERVER_URL = ""
+SERVER_ADDR = 'http://192.168.1.10:3000'
+SERVER_URL = "/checkData"
 
 while (True):
     if (os.path.split(os.getcwd())[1] == APPLICATION_NAME):

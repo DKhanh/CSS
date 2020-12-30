@@ -37,3 +37,19 @@ Response = Connection.getresponse()
 print(response.read().decode())
 
 
+import json
+from urllib.request import urlopen
+
+data = {"text": "Hello world github/linguist№1 **cool**, and #1!"}
+response = urlopen("http://host.docker.internal:3000/checkData", json.dumps(data).encode())
+print(response.read().decode())
+
+
+url = 'http://host.docker.internal:3000/checkData'
+myobj = {'somekey': 'somevalue'}
+
+x = requests.post(url, data = myobj)
+
+#print the response text (the content of the requested file):
+
+print(x.text)

@@ -53,7 +53,11 @@ class VerifyData:
         PriShardHash = self.MerkleTree.compute_hash(ShardData)
         PubShardHash = self.MerkleTree.compute_hash(PriShardHash)
 
-        AuxiPath = self.MerkleTree.getMerklePath(PriShardHash)
+        AuxiPath = False
+        for index, leaf in enumerate(self.MerkleTree.leaves):
+            if index == ShardIndex:
+                AuxiPath = self.MerkleTree.generateMerklePath(leaf)
+
         if (AuxiPath != False):
             return PubShardHash, AuxiPath
         else:
